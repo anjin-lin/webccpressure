@@ -1,3 +1,4 @@
+import encodings.idna
 import os,sys
 import time,json
 import asyncio
@@ -40,7 +41,7 @@ class Presstest(object):
                     self.req_status[req.status]+=1
                 else:
                     self.req_status[req.status]=1
-                print("\r请求总数量：",self.states['request_num'],"   状态统计：",self.req_status, end= "",flush=True)
+            print("\r请求总数量：",self.states['request_num'],"   状态统计：",self.req_status, end= "",flush=True)
 
     async def http_parameter(self):
         if self.config['num']>0:
@@ -85,7 +86,7 @@ def command():
     args_parser.add_argument('-d', '--d', type=str, nargs='?', help='设置每个请求的请求体数据,格式: {"xxx":"xxx"}')
     args_parser.add_argument('-fd', '--fd', type=str, nargs='?', help='设置每个请求的请求体数据(表单提交请设置)')
     args_parser.add_argument('-H', '--H', type=str, nargs='?', help='设置每个请求的请求头,格式：{"xxx":"xxx"}')
-    if 1==len(sys.argv) and sys.argv[0]==__file__:
+    if 1==len(sys.argv):
         args_parser.print_help()
     else:
         args = args_parser.parse_args()
